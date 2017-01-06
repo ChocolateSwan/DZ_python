@@ -1,0 +1,27 @@
+{% extends 'base_page.html' %}
+
+{% block title %}
+   DZ_RIP
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'sign_in' %}">Выйти</a></li>
+        </ul>
+
+{% endblock %}
+
+{% block head %}
+    Добавление матча (вид спорта: {{ type_of_sport }})
+{% endblock %}
+
+{% block body %}
+   <div class="container">
+        <form method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

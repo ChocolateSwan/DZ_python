@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset=UTF-8">
+    <title>DZ_RIP</title>
+    <link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href='{% static "css/bootstrap.css" %}' rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
+    <link href="/static/css/jumbotron.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #2b542c">
+      <div class="container" >
+          <p class="navbar-brand" style ="color: #FFFFFF">{% block title %}{% endblock %}</p>
+      </div>
+    </nav>
+    <div class="jumbotron", style="background-color: #5cb85c">
+        <h1 align="center" >{% block head %}{% endblock %}</h1>
+    </div>
+    <div class="container" style="align-content: center">
+        {% block body %}{% endblock %}
+    </div>
+    <hr> </hr>
+</body></html>

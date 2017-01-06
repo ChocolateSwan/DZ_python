@@ -1,0 +1,127 @@
+{% extends 'base_page.html' %}
+
+{% block title %}
+   DZ_RIP
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'sign_in' %}">Выйти</a></li>
+        </ul>
+<script src='/static/js/validation.js'></script>
+
+
+
+
+    <!-- Модаааалкаааа -->
+
+{% endblock %}
+
+{% block head %}
+
+    {{match.participant_1}} VS {{ match.participant_2 }}
+
+{% endblock %}
+
+{% block body %}
+    <style type="text/css">
+    th {
+        text-align:center;
+    }
+    </style>
+
+
+    <img src="{{ match.participant_1.picture.url }}" alt="нету картинки =(" height="150px"  align="left" />
+    <img src="{{ match.participant_2.picture.url }}" alt="нету картинки =(" height="150px" align="right" />
+
+<div align="center"> Дата: {{ match.date_of_match|date:"D, d M Y" }}</div>
+    <div align="center"> Время: {{ match.date_of_match|date:"H:i" }}</div>
+    <div align="center"> Вид спорта: {{ match.participant_1.kind_of_sport }}</div>
+    <table align="center" border="2" bordercolor="#2b542c" width="800">
+    <caption>Сравнение участвующих команд</caption>
+    <tr>
+        <th></th>
+        <th>Рэйтинг</th>
+        <th>Количество сыгранных матчей</th>
+        <th>Количество выигранных матчей</th>
+    </tr>
+    <tr>
+        <th>{{match.participant_1}}</th>
+        <th>{{match.participant_1.rating}}</th>
+        <th>{{match.participant_1.quantity_game}}</th>
+        <th>{{match.participant_1.quantity_win}}</th>
+    </tr>
+    <tr>
+        <th>{{match.participant_2}}</th>
+        <th>{{match.participant_2.rating}}</th>
+        <th>{{match.participant_2.quantity_game}}</th>
+        <th>{{match.participant_2.quantity_win}}</th>
+    </tr>
+    </table>
+    <div style="margin-top: 20px">
+    Список пользователей, поставивших на команду "{{ match.participant_1 }}":
+    {% for ante in antes_part_1 %}
+        {{ ante.user_for.username }}
+        ({{ ante.user_for.first_name }}&nbsp;{{ ante.user_for.last_name }})
+        {% empty %}
+        список пуст
+        {% endfor %}
+    </div>
+     <div style="margin-top: 15px">
+    Список пользователей, поставивших на команду "{{ match.participant_2 }}":
+    {% for ante in antes_part_2 %}
+        {{ ante.user_for.username }}
+        ({{ ante.user_for.first_name }} &nbsp;{{ ante.user_for.last_name }})
+        {% empty %}
+        cписок пуст
+        {% endfor %}
+    </div>
+
+
+    <!-- Модаааалкаааа -->
+
+
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float:right;margin-top: 15px; background-color: #5cb85c; border-color: #2b542c;font-size: 25px" >Сделать ставку</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" align="center">Ставка на матч <br>{{ match.date_of_match |date:"<d. m. Y>"}}</h4>
+        </div>
+        <div class="modal-body">
+
+            <FORM name="ante_form" method="post" action="{% url 'match_url' match.id %}" onsubmit="return validate_form ( );">
+                {% csrf_token ​%}
+                <label> Сумма ставки</label>
+        <input AUTOCOMPLETE="off" name="sum_of_ante" class="sum" size = '30' style="margin-bottom: 10px">
+        <br>
+
+        </datalist>
+            <label>Участник:</label>
+
+        <SELECT name="participant">
+        <OPTION value="">Выберите участника</OPTION>
+        <OPTION value="part_1">{{ match.participant_1 }}</OPTION>
+        <OPTION value="part_2">{{ match.participant_2 }}</OPTION>
+
+        </SELECT>
+
+        <INPUT type="submit" name="send" value="Поставить!" style="margin-top: 10px"></P>
+
+</FORM>
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+
+
+{% endblock %}
+
+
+
