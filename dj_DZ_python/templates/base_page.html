@@ -12,7 +12,7 @@
 
 
     <link href="/static/css/jumbotron.css" rel="stylesheet">
-
+    <link href="/static/css/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -23,11 +23,15 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #2b542c">
       <div class="container" >
           <p class="navbar-brand" style ="color: #FFFFFF">
+              <ul class="nav navbar-nav navbar-left">
+          <li><div class="top-buffer-username"><h3><a href="{% url 'MatchModel' %}">Ставки онлайн</a></h3></div></li>
+              </ul>
+
 
               <ul class="nav navbar-nav navbar-right">
                   {% if request.user.is_authenticated %}
-                  <li>{% include "avatar.html" with width=35 height=35 av_user=request.user%}</li>
-                  <li>{{ request.user.username }}</li>
+                  <li><div class="top-buffer-nav">{% include "avatar.html" with width=35 height=35 av_user=request.user%}</div></li>
+                  <li><div class="top-buffer-username">{{ request.user.username }}</div></li>
                   <li><a href="{% url 'logout' %}">Выйти</a></li>
                   {% else %}
                   <li><a href="{% url 'sign_in' %}">Войти</a></li>

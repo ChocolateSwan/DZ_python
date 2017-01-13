@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.hashers import make_password
 from django.contrib import auth
 from django.contrib.auth import authenticate, logout
@@ -21,8 +21,8 @@ def create_match_view(request, type):
             request.POST, request.FILES, initial={
                 'kind_of_sport': type})
         if form.is_valid():
-            form.save(True)
-            return redirect('MatchModel')
+            match = form.save(True)
+            return redirect('match_url', id=match.id)
     else:
 
         form = CreateMatchForm(initial={'kind_of_sport': type})
@@ -101,7 +101,8 @@ class MatchListView(View):
                       "page": paginated_matches, "pageRange": page_range})
 
 
-class MatchView (View):
+class MatchView (LoginRequiredMixin, View):
+    login_url = 'sign_in'
 
     def get(self, request, id):
         match = (MatchModel.objects.filter(id=id))[0]
@@ -127,10 +128,10 @@ class MatchView (View):
         form = CreateAnteForm(request.POST, request.FILES, initial={'match': match,
                                                                     'antes_part_1': match.participant_1_id,
                                                                     'antes_part_2': match.participant_2_id})
-        print("wtf")
+
         if form.is_valid():
             form.save(request.user, match)
-            print("HERE")
+
 
         return render(request, 'match.html', {"match": match, "form": form, "antes_part_1": antes_part_1,
                                               "antes_part_2": antes_part_2})

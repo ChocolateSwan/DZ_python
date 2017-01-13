@@ -19,7 +19,8 @@ class CreateAnteForm(forms.ModelForm):
         model = AnteModel
         fields = ('amount', 'team_for')
         widgets = {
-            'team_for': forms.RadioSelect()
+            'amount': forms.TextInput(attrs={'id':'sum_of_ante'}),
+            'team_for': forms.RadioSelect(attrs={'id':'participant'})
         }
 
     def save(self, user, match):
