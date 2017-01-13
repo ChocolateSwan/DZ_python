@@ -19,4 +19,3 @@ def paginate(objects_list, request, perPage):
     if high > paginator.num_pages:
         high = paginator.num_pages
     return objects_page, range(low, high + 1)
-

@@ -55,8 +55,7 @@ ROOT_URLCONF = 'DZ_python.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,7 +81,7 @@ DATABASES = {
         'USER': 'olga_user',
         'PASSWORD': "123",
         'HOST': "localhost",
-        'PORT': 3306,# Стандартный порт MySQL
+        'PORT': 3306,  # Стандартный порт MySQL
         'OPTIONS': {'charset': 'utf8'},
         'TEST_CHARSET': 'utf8',
     }

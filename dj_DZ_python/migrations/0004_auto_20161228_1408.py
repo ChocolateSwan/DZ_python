@@ -17,7 +17,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='teammodel',
             name='picture',
-            field=models.ImageField(blank=True, max_length=1000, upload_to='', verbose_name='Картинка'),
+            field=models.ImageField(
+                blank=True,
+                max_length=1000,
+                upload_to='',
+                verbose_name='Картинка'),
         ),
         migrations.AlterField(
             model_name='antemodel',
@@ -32,17 +36,27 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='antemodel',
             name='match_for',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dj_DZ_python.MatchModel', verbose_name='Матч'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='dj_DZ_python.MatchModel',
+                verbose_name='Матч'),
         ),
         migrations.AlterField(
             model_name='antemodel',
             name='team_for',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dj_DZ_python.TeamModel', verbose_name='Команда'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='dj_DZ_python.TeamModel',
+                verbose_name='Команда'),
         ),
         migrations.AlterField(
             model_name='antemodel',
             name='user_for',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name='Пользователь'),
         ),
         migrations.AlterField(
             model_name='matchmodel',
@@ -52,12 +66,20 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='matchmodel',
             name='participant_1',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='TeamModel_participant_1', to='dj_DZ_python.TeamModel', verbose_name='Участник 1'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='TeamModel_participant_1',
+                to='dj_DZ_python.TeamModel',
+                verbose_name='Участник 1'),
         ),
         migrations.AlterField(
             model_name='matchmodel',
             name='participant_2',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='TeamModel_participant_2', to='dj_DZ_python.TeamModel', verbose_name='Участник 2'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='TeamModel_participant_2',
+                to='dj_DZ_python.TeamModel',
+                verbose_name='Участник 2'),
         ),
         migrations.AlterField(
             model_name='teammodel',
@@ -67,31 +89,41 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='teammodel',
             name='name',
-            field=models.CharField(max_length=255, unique=True, verbose_name='Название команды'),
+            field=models.CharField(
+                max_length=255,
+                unique=True,
+                verbose_name='Название команды'),
         ),
         migrations.AlterField(
             model_name='teammodel',
             name='quantity_game',
-            field=models.IntegerField(default=0, verbose_name='Кол-во матчей (всего)'),
+            field=models.IntegerField(
+                default=0, verbose_name='Кол-во матчей (всего)'),
         ),
         migrations.AlterField(
             model_name='teammodel',
             name='quantity_win',
-            field=models.IntegerField(default=0, verbose_name='Кол-во выигр. матчей'),
+            field=models.IntegerField(
+                default=0, verbose_name='Кол-во выигр. матчей'),
         ),
         migrations.AlterField(
             model_name='user',
             name='date_of_birth',
-            field=models.DateField(blank=True, null=True, verbose_name='Дата рождения'),
+            field=models.DateField(
+                blank=True, null=True, verbose_name='Дата рождения'),
         ),
         migrations.AlterField(
             model_name='user',
             name='is_in_black_list',
-            field=models.BooleanField(default=0, verbose_name='В черном списке'),
+            field=models.BooleanField(
+                default=0, verbose_name='В черном списке'),
         ),
         migrations.AlterField(
             model_name='user',
             name='phone',
-            field=models.CharField(default='', max_length=15, verbose_name='Номер телефона'),
+            field=models.CharField(
+                default='',
+                max_length=15,
+                verbose_name='Номер телефона'),
         ),
     ]

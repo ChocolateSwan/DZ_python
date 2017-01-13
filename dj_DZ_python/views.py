@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.hashers import make_password
 from django.contrib import auth
-from django.contrib.auth import authenticate,logout
+from django.contrib.auth import authenticate, logout
 from django.views import View
 from dj_DZ_python.models import *
 from django.contrib.auth import login
@@ -12,15 +12,14 @@ from dj_DZ_python.paginate import paginate
 # Create your views here.
 
 
-
-
-
 def create_match_view(request, type):
     if not request.user.is_superuser:
         return redirect('MatchModel')
 
     if request.method == 'POST':
-        form = CreateMatchForm(request.POST, request.FILES, initial={'kind_of_sport': type})
+        form = CreateMatchForm(
+            request.POST, request.FILES, initial={
+                'kind_of_sport': type})
         if form.is_valid():
             form.save(True)
             return redirect('MatchModel')
@@ -28,13 +27,8 @@ def create_match_view(request, type):
 
         form = CreateMatchForm(initial={'kind_of_sport': type})
 
-    return render(request, 'create_match.html', {'form': form,'type_of_sport':type})
-
-
-
-
-
-
+    return render(request, 'create_match.html', {
+                  'form': form, 'type_of_sport': type})
 
 
 def create_team_view(request):
@@ -50,8 +44,6 @@ def create_team_view(request):
         form = CreateTeamForm()
 
     return render(request, 'create_team.html', {'form': form})
-
-
 
 
 # Регистрация
@@ -100,30 +92,37 @@ def log_out(request):
     return redirect('MatchModel')
 
 
-
 class MatchListView(View):
-    def get(self,request):
+
+    def get(self, request):
         matches = MatchModel.objects.order_by('date_of_match')
         paginated_matches, page_range = paginate(matches, request, 2)
-        return render(request, "match_list.html", {"page": paginated_matches, "pageRange": page_range})
+        return render(request, "match_list.html", {
+                      "page": paginated_matches, "pageRange": page_range})
 
 
 class MatchView (View):
+
     def get(self, request, id):
         match = (MatchModel.objects.filter(id=id))[0]
-        antes_part_1 = AnteModel.objects.filter(match_for=match.id,team_for=match.participant_1_id)
-        antes_part_2 = AnteModel.objects.filter(match_for=match.id,team_for=match.participant_2_id)
+        antes_part_1 = AnteModel.objects.filter(
+            match_for=match.id, team_for=match.participant_1_id)
+        antes_part_2 = AnteModel.objects.filter(
+            match_for=match.id, team_for=match.participant_2_id)
 
-        form = CreateAnteForm(initial={'match':match,
+        form = CreateAnteForm(initial={'match': match,
                                        'antes_part_1': match.participant_1_id,
                                        'antes_part_2': match.participant_2_id})
 
-        return render(request, 'match.html', {"match": match,"form":form, "antes_part_1": antes_part_1,
+        return render(request, 'match.html', {"match": match, "form": form, "antes_part_1": antes_part_1,
                                               "antes_part_2": antes_part_2})
-    def post (self, request, id):
+
+    def post(self, request, id):
         match = (MatchModel.objects.filter(id=id))[0]
-        antes_part_1 = AnteModel.objects.filter(match_for=match.id, team_for=match.participant_1_id)
-        antes_part_2 = AnteModel.objects.filter(match_for=match.id, team_for=match.participant_2_id)
+        antes_part_1 = AnteModel.objects.filter(
+            match_for=match.id, team_for=match.participant_1_id)
+        antes_part_2 = AnteModel.objects.filter(
+            match_for=match.id, team_for=match.participant_2_id)
 
         form = CreateAnteForm(request.POST, request.FILES, initial={'match': match,
                                                                     'antes_part_1': match.participant_1_id,
@@ -133,9 +132,5 @@ class MatchView (View):
             form.save(request.user, match)
             print("HERE")
 
-        return render(request, 'match.html', {"match": match, "form":form, "antes_part_1": antes_part_1,
+        return render(request, 'match.html', {"match": match, "form": form, "antes_part_1": antes_part_1,
                                               "antes_part_2": antes_part_2})
-
-
-
-

@@ -21,11 +21,18 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='antemodel',
             name='team_for',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dj_DZ_python.TeamModel', verbose_name='На команду'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='dj_DZ_python.TeamModel',
+                verbose_name='На команду'),
         ),
         migrations.AlterField(
             model_name='user',
             name='avatar',
-            field=models.ImageField(blank=True, max_length=1000, upload_to='', verbose_name='Аватар'),
+            field=models.ImageField(
+                blank=True,
+                max_length=1000,
+                upload_to='',
+                verbose_name='Аватар'),
         ),
     ]
