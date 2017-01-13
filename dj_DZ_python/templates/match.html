@@ -104,7 +104,7 @@
         </div>
         <div class="modal-body">
 
-           <form method="POST"  enctype="multipart/form-data">
+           <form method="POST"  enctype="multipart/form-data" onsubmit="return validate_form ( )" name="ante_form">
             {% csrf_token %}
             {{ form.as_p}}
 
