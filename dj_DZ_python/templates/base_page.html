@@ -22,7 +22,43 @@
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #2b542c">
       <div class="container" >
-          <p class="navbar-brand" style ="color: #FFFFFF">{% block title %}{% endblock %}</p>
+          <p class="navbar-brand" style ="color: #FFFFFF">
+
+              <ul class="nav navbar-nav navbar-right">
+                  {% if request.user.is_authenticated %}
+                  <li>{% include "avatar.html" with width=35 height=35 av_user=request.user%}</li>
+                  <li>{{ request.user.username }}</li>
+                  <li><a href="{% url 'logout' %}">Выйти</a></li>
+                  {% else %}
+                  <li><a href="{% url 'sign_in' %}">Войти</a></li>
+                  <li><a href="{% url 'sign_up' %}">Регистрация</a></li>
+                  {% endif %}
+              </ul>
+
+               {% if request.user.is_superuser %}
+               <ul class="nav navbar-nav navbar-right">
+                   <li class="dropdown">
+                      <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #FFFFFF">
+                       Добавить матч
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{% url 'create_match' 'гандбол'%}">гандбол</a></li>
+                        <li><a href="{% url 'create_match' 'футбол'%}">футбол</a></li>
+                        <li><a href="{% url 'create_match' 'волейбол'%}">волейбол</a></li>
+                        <li><a href="{% url 'create_match' 'баскетбол'%}">баскетбол</a></li>
+                        <li><a href="{% url 'create_match' 'бейсбол'%}">бейсбол</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'create_team' %}" style="color: #FFFFFF">Добавить команду</a>
+                    </li>
+               </ul>
+              {% endif %}
+              {% block title %}
+
+              {% endblock %}
+          </p>
       </div>
     </nav>
     <div class="jumbotron", style="background-color: #5cb85c">

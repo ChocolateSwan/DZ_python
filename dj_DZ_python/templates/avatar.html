@@ -1,0 +1,6 @@
+
+{% if av_user.avatar %}
+<img src="{{ av_user.avatar.url }}" class="img-circle " alt="Загрузить аватар" width="{{ width }}" height="{{ height }}">
+{% else %}
+<img src="/media/лиса.jpg" class="img-circle " alt="Загрузить аватар" width="{{ width }}" height="{{ height }}">
+{% endif %}

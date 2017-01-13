@@ -2,15 +2,12 @@
 
 {% block title %}
    DZ_RIP
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="{% url 'sign_in' %}">Выйти</a></li>
-        </ul>
+
 <script src='/static/js/validation.js'></script>
 
 
 
 
-    <!-- Модаааалкаааа -->
 
 {% endblock %}
 
@@ -74,7 +71,21 @@
         {% endfor %}
     </div>
 
-
+{% if form.errors%}
+            <div class="col-md-4 col-md-offset-2">
+            <div class="alert alert-warning">
+                <a href="{% url 'match_url' match.id %}" class="close" data-dismiss="alert">×</a>
+                {% for f in form %}
+                    {% if f.errors %}
+                     <p>{{ f.label }}</p>
+                    {% for e in f.errors %}
+                        <p>{{ e }}</p>
+                    {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            </div>
+        {% endif %}
     <!-- Модаааалкаааа -->
 
 
@@ -93,25 +104,14 @@
         </div>
         <div class="modal-body">
 
-            <FORM name="ante_form" method="post" action="{% url 'match_url' match.id %}" onsubmit="return validate_form ( );">
-                {% csrf_token ​%}
-                <label> Сумма ставки</label>
-        <input AUTOCOMPLETE="off" name="sum_of_ante" class="sum" size = '30' style="margin-bottom: 10px">
-        <br>
+           <form method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
 
-        </datalist>
-            <label>Участник:</label>
-
-        <SELECT name="participant">
-        <OPTION value="">Выберите участника</OPTION>
-        <OPTION value="part_1">{{ match.participant_1 }}</OPTION>
-        <OPTION value="part_2">{{ match.participant_2 }}</OPTION>
-
-        </SELECT>
-
-        <INPUT type="submit" name="send" value="Поставить!" style="margin-top: 10px"></P>
-
-</FORM>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </div>
+        </form>
 
       </div>
 

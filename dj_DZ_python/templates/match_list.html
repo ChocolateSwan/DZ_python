@@ -2,30 +2,6 @@
 
 {% block title %}
    DZ_RIP
-        <ul class="nav navbar-nav navbar-right">
-
-        <li class="dropdown">
-          <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #FFFFFF">
-            Добавить матч
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="{% url 'create_match' 'гандбол'%}">гандбол</a></li>
-            <li><a href="{% url 'create_match' 'футбол'%}">футбол</a></li>
-            <li><a href="{% url 'create_match' 'волейбол'%}">волейбол</a></li>
-            <li><a href="{% url 'create_match' 'баскетбол'%}">баскетбол</a></li>
-            <li><a href="{% url 'create_match' 'бейсбол'%}">бейсбол</a></li>
-          </ul>
-        </li>
-
-
-
-        <li><a href="{% url 'create_team' %}" style="color: #FFFFFF">Добавить команду</a></li>
-          <li><a href="{% url 'sign_in' %}">Выйти</a></li>
-
-
-        </ul>
-
 {% endblock %}
 
 {% block head %}
@@ -34,7 +10,7 @@
 
 {% block body %}
     <ol>
-     {% for match in matches %}
+     {% for match in page %}
         <li> Матч: {{match.participant_1}} VS {{ match.participant_2 }}
             <br> Дата: {{ match.date_of_match|date:"D, d M Y" }}<br>
             <img src="{{ match.participant_1.picture.url }}" alt="нету картинки =(" height="150px" style="margin: 15px"/>
@@ -47,6 +23,9 @@
         {% empty %}
         Список пуст
         {% endfor %}
+
     </ol>
+    {% include "paginate.html" %}
+
 
 {% endblock %}

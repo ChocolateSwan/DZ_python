@@ -2,9 +2,7 @@
 
 {% block title %}
    DZ_RIP
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="{% url 'sign_in' %}">Войти</a></li>
-        </ul>
+
 
 {% endblock %}
 
@@ -13,13 +11,13 @@
 {% endblock %}
 
 {% block body %}
-    <form class="form-horizontal" method="POST">
+    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
     {% csrf_token ​%}
     <div class="form-group">
         {% if form.errors%}
             <div class="col-md-4 col-md-offset-2">
             <div class="alert alert-warning">
-                <a href="/reg" class="close" data-dismiss="alert">×</a>
+                <a href="{% url 'sign_up' %}" class="close" data-dismiss="alert">×</a>
                 {% for f in form %}
                     {% if f.errors %}
                      <p>{{ f.label }}</p>
