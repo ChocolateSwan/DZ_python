@@ -24,14 +24,14 @@
       <div class="container" >
           <p class="navbar-brand" style ="color: #FFFFFF">
               <ul class="nav navbar-nav navbar-left">
-          <li><div class="top-buffer-username"><h3><a href="{% url 'MatchModel' %}">Ставки онлайн</a></h3></div></li>
+          <li><div class="top-buffer-username" ><h3><a style="color: #FFFFFF" href="{% url 'MatchModel' %}">Ставки онлайн</a></h3></div></li>
               </ul>
 
 
               <ul class="nav navbar-nav navbar-right">
                   {% if request.user.is_authenticated %}
                   <li><div class="top-buffer-nav">{% include "avatar.html" with width=35 height=35 av_user=request.user%}</div></li>
-                  <li><div class="top-buffer-username">{{ request.user.username }}</div></li>
+                  <li><div class="top-buffer-username" style="color: #FFFFFF; margin-left: 10px">{{ request.user.username }}</div></li>
                   <li><a href="{% url 'logout' %}">Выйти</a></li>
                   {% else %}
                   <li><a href="{% url 'sign_in' %}">Войти</a></li>

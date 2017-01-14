@@ -19,8 +19,8 @@ class CreateAnteForm(forms.ModelForm):
         model = AnteModel
         fields = ('amount', 'team_for')
         widgets = {
-            'amount': forms.TextInput(attrs={'id':'sum_of_ante'}),
-            'team_for': forms.RadioSelect(attrs={'id':'participant'})
+            'amount': forms.TextInput(attrs={'id': 'sum_of_ante'}),
+            'team_for': forms.RadioSelect(attrs={'id': 'participant'})
         }
 
     def save(self, user, match):
@@ -47,7 +47,8 @@ class CreateMatchForm (forms.ModelForm):
         model = MatchModel
         fields = ('date_of_match', 'participant_1', 'participant_2')
         widgets = {
-            'date_of_match': forms.DateInput(format=('%Y-%m-%d'), attrs={'placeholder': "ГГГГ-ММ-ДД"})
+            'date_of_match': forms.DateInput(format=('%Y-%m-%d'),
+                                             attrs={'placeholder': "ГГГГ-ММ-ДД"})
         }
 
     def save(self, commit=False):

@@ -132,6 +132,6 @@ class MatchView (LoginRequiredMixin, View):
         if form.is_valid():
             form.save(request.user, match)
 
-
-        return render(request, 'match.html', {"match": match, "form": form, "antes_part_1": antes_part_1,
+        return render(request, 'match.html', {"match": match, "form": form,
+                                              "antes_part_1": antes_part_1,
                                               "antes_part_2": antes_part_2})
